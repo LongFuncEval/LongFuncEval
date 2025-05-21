@@ -9,7 +9,8 @@ python extract_responses_from_complex_func_bench.py
 The value of number of tokens in the response can be controlled by setting `min_tokens_threshold` to a different value in extract_responses_from_complex_func_bench.py. The default tokenizer used is `meta-llama/llama-3.1-70b-instruct`, which can also be changed by changing the value of `tokenizer_model`.
 This run should create data files with names like `{host}_{endpoint_name}.json` in the `data` directory.
 
-2. Run 
+2. Run
+
 ```python create_data_subsets.py
 ```
 
