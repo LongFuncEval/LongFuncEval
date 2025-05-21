@@ -1,8 +1,8 @@
-# LongFuncEval
+## LongFuncEval
 
 This is the repo for the paper [LongFuncEval: Measuring the effectiveness of long context models for function calling](https://arxiv.org/abs/2505.10570). 
 
-# Installation
+### Installation
 
 ```
 pip install -r requirements.txt
@@ -11,7 +11,7 @@ pip install -r requirements.txt
 The large_response_QA.large_response_utils.py contains code for model inference from vllm or OpenAI services from AzureOpenAI. You would need to install `vllm`, `torch`, and `openai` if you want to use that code.
 Otherwise, you will need to add your own code for model inference to `get_lm` and `generate` methods in that file.
 
-# Dataset Creation and Experiments for Challenge 2 (Long Tool Responses)
+### Dataset Creation and Experiments for Challenge 2 (Long Tool Responses)
 
 1. Place the ComplexFuncBench (https://huggingface.co/datasets/THUDM/ComplexFuncBench/tree/main) dataset file i.e. ComplexFuncBench.jsonl in the `data` directory and run 
 ```
@@ -41,7 +41,9 @@ python run_experiments.py \
 The config file `experiment_config.yaml` has details of how to provide the response token limit or position of the answer etc.
 
 
-# Cite as: 
+### Cite as: 
+
+```
 @misc{kate2025longfuncevalmeasuringeffectivenesslong,
       title={LongFuncEval: Measuring the effectiveness of long context models for function calling}, 
       author={Kiran Kate and Tejaswini Pedapati and Kinjal Basu and Yara Rizk and Vijil Chenthamarakshan and Subhajit Chaudhury and Mayank Agarwal and Ibrahim Abdelaziz},
@@ -51,3 +53,4 @@ The config file `experiment_config.yaml` has details of how to provide the respo
       primaryClass={cs.SE},
       url={https://arxiv.org/abs/2505.10570}, 
 }
+```
