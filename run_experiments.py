@@ -108,7 +108,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     abs_path_of_config_file = os.path.realpath(args.config)
     data_config = yaml.safe_load(open(args.config))
-    import pdb;pdb.set_trace()
     data_dir = os.path.join(os.path.dirname(abs_path_of_config_file), data_config["data_dir"])
     results_dir = os.path.join(
         os.path.dirname(abs_path_of_config_file), data_config["results_dir"]

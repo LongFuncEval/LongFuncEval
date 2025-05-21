@@ -1,13 +1,17 @@
 # LongFuncEval
 
+This is the repo for the paper [LongFuncEval: Measuring the effectiveness of long context models for function calling](https://arxiv.org/abs/2505.10570). 
+
 # Installation
 
 ```
 pip install -r requirements.txt
 ```
 
-The large_response_QA.large_response_utils.py contains code for model inference from vllm or OpenAI services from AzureAI. You would need to install `vllm`, `torch`, and `openai` if you want to use that code.
-Otherwise, you will need to add your own code for model inference.
+The large_response_QA.large_response_utils.py contains code for model inference from vllm or OpenAI services from AzureOpenAI. You would need to install `vllm`, `torch`, and `openai` if you want to use that code.
+Otherwise, you will need to add your own code for model inference to `get_lm` and `generate` methods in that file.
+
+# Dataset Creation and Experiments for Challenge 2 (Long Tool Responses)
 
 1. Place the ComplexFuncBench (https://huggingface.co/datasets/THUDM/ComplexFuncBench/tree/main) dataset file i.e. ComplexFuncBench.jsonl in the `data` directory and run 
 ```
@@ -24,3 +28,26 @@ python create_data_subsets.py
 ```
 
 This process creates files from the data files which are used for the long context experiments. These files will be placed in the `data_subsets_for_lim_experiments` directory.
+
+3. The script `run_experiments.py` can be used to run the experiments on long tool responses extracted from the step above. It takes the following arguments:
+```
+python run_experiments.py \
+        --config experiment_config.yaml \
+        --task_list BookingGetRoomListWithAvailabilityTaskList \
+        --model_name meta-llama/llama-3-1-70b-instruct
+        --num_processes 0
+```
+
+The config file `experiment_config.yaml` has details of how to provide the response token limit or position of the answer etc.
+
+
+# Cite as: 
+@misc{kate2025longfuncevalmeasuringeffectivenesslong,
+      title={LongFuncEval: Measuring the effectiveness of long context models for function calling}, 
+      author={Kiran Kate and Tejaswini Pedapati and Kinjal Basu and Yara Rizk and Vijil Chenthamarakshan and Subhajit Chaudhury and Mayank Agarwal and Ibrahim Abdelaziz},
+      year={2025},
+      eprint={2505.10570},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2505.10570}, 
+}
