@@ -19,7 +19,8 @@ This run should create data files with names like `{host}_{endpoint_name}.json` 
 
 2. Run
 
-```python create_data_subsets.py
+```
+python create_data_subsets.py
 ```
 
 This process creates files from the data files which are used for the long context experiments. These files will be placed in the `data_subsets_for_lim_experiments` directory.
