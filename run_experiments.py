@@ -4,7 +4,7 @@ import os
 import pickle
 from multiprocessing import Pool
 from typing import Any
-
+import pandas as pd
 import large_response_QA.tasks.task_list as task_list_module
 import yaml
 
@@ -54,7 +54,6 @@ def run_tasks_for_one_api_response(
             except BaseException as e:
                 print(e)
     return output_list
-
 
 if __name__ == "__main__":
 
@@ -132,7 +131,7 @@ if __name__ == "__main__":
         "decoding_method": "greedy",
         "stop_sequences": [],
     }
-
+    results_list = []
     for token_limit, position_limit in token_limit_position_limit_dict.items():
         print(token_limit)
         class_ = getattr(task_list_module, args.task_list)
@@ -143,7 +142,7 @@ if __name__ == "__main__":
             data_dir, f"{host}_{endpoint_name}_subset_{token_limit}.json"
         )
         task_list_obj = class_(data_file_path)
-        for position in [5]:# range(position_limit):
+        for position in range(position_limit):
             task_outputs = []
             api_response_requests_for_task = []
 
@@ -183,13 +182,30 @@ if __name__ == "__main__":
             if not os.path.exists(model_results_dir_path):
                 os.makedirs(model_results_dir_path)
 
-            pickle.dump(
-                task_outputs,
-                open(
-                    os.path.join(
-                        model_results_dir_path,
-                        f"{token_limit}_{position + 1}.pickle",
-                    ),
-                    "wb",
-                ),
+            for task_output in task_outputs:
+                if isinstance(task_output, list):
+                    for result in task_output:
+                        results_list.append({
+                            "api_response": result.api_response,
+                            "question": result.question,
+                            "gold_answer": result.gold_answer,
+                            "pred_answer": result.pred_answer,
+                            "metrics": result.metrics,
+                            "task_type": [task_type.value for task_type in result.task_type]
+                        })
+                else:
+                    results_list.append({
+                        "api_response": task_output.api_response,
+                        "question": task_output.question,
+                        "gold_answer": task_output.gold_answer,
+                        "pred_answer": task_output.pred_answer,
+                        "metrics": task_output.metrics,
+                        "task_type": [task_type.value for task_type in task_output.task_type]
+                    })
+
+            df = pd.DataFrame.from_records(results_list)
+            df['api_response'] = df['api_response'].apply(json.dumps)
+            df.to_csv(
+                os.path.join(model_results_dir_path, f"{token_limit}_{position + 1}.csv"),
+                index=False,
             )
