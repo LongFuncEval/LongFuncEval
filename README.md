@@ -1,5 +1,13 @@
 # LongFuncEval
-Repository for the LongFuncEval work
+
+# Installation
+
+```
+pip install -r requirements.txt
+```
+
+The large_response_QA.large_response_utils.py contains code for model inference from vllm or OpenAI services from AzureAI. You would need to install `vllm`, `torch`, and `openai` if you want to use that code.
+Otherwise, you will need to add your own code for model inference.
 
 1. Place the ComplexFuncBench (https://huggingface.co/datasets/THUDM/ComplexFuncBench/tree/main) dataset file i.e. ComplexFuncBench.jsonl in the `data` directory and run 
 ```

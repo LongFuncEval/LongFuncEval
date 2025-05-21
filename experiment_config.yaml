@@ -1,0 +1,18 @@
+# paths relative to the location of the experiment_config.yaml
+data_dir: '../data/data_subsets_for_lim_experiments'
+results_dir: './results'
+# For the first part of the experiment that varies the token size of response, 
+# the setting is: token_limit_position_limit_pairs: '{"80000":1, "40000": 1, "20000": 1, "10000": 1}'
+# For the experiment that varies the position but keeps the num tokens to 80000 and varies the position
+# of the answer from 1 to 8, the setting is: token_limit_position_limit_pairs: '{"80000":8}'
+task_lists:
+    BookingGetRoomListWithAvailabilityTaskList:
+        token_limit_position_limit_pairs: '{"80000":1, "40000": 1, "20000": 1, "10000": 1}'
+    BookingSearchFlightsMultiStopsTaskList:
+        token_limit_position_limit_pairs: '{"80000":1, "40000": 1, "20000": 1, "10000": 1}'
+    BookingGetAvailabilityTaskList:
+        token_limit_position_limit_pairs: '{"80000":1, "40000": 1, "20000": 1, "10000": 1}'
+    BookingSearchCarRentalsTaskList:
+        token_limit_position_limit_pairs: '{"80000":1, "40000": 1, "20000": 1, "10000": 1}'
+    BookingGetSeatMapTaskList:
+        token_limit_position_limit_pairs: '{"80000":1, "40000": 1, "20000": 1, "10000": 1}'

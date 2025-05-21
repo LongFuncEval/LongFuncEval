@@ -3,7 +3,7 @@ from typing import Any
 from . import evals
 from .base import Task
 from .data_structures import LongResponseQASample, TaskAttributes
-from large_response_QA.large_response_utils import manipulate_response
+from ..large_response_utils import manipulate_response
 import json
 import os
 

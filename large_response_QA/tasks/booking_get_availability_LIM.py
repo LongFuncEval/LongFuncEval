@@ -1,7 +1,7 @@
 import json
 from typing import Any, Union
 
-from large_response_QA.large_response_utils import manipulate_response
+from ..large_response_utils import manipulate_response
 
 from . import evals
 from .base import Task
