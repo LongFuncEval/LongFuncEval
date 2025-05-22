@@ -8,7 +8,7 @@ This is the repo for the paper [LongFuncEval: Measuring the effectiveness of lon
 pip install -r requirements.txt
 ```
 
-The large_response_QA.large_response_utils.py contains code for model inference from vllm or OpenAI services from AzureOpenAI. You would need to install `vllm`, `torch`, and `openai` if you want to use that code.
+The `large_response_QA.large_response_utils.py` contains code for model inference from vllm or OpenAI services from AzureOpenAI. You would need to install `vllm`, `torch`, and `openai` if you want to use that code.
 Otherwise, you will need to add your own code for model inference to `get_lm` and `generate` methods in that file.
 
 ### Dataset Creation and Experiments for Challenge 2 (Long Tool Responses)
