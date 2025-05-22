@@ -1,6 +1,7 @@
 import json
 from typing import Any
 
+from large_response_QA.large_response_utils import extract_endpoint_data
 from transformers import AutoTokenizer
 
 data_path = "./data/ComplexFuncBench.jsonl"
@@ -37,4 +38,11 @@ for result in results:
                     large_responses[latest_function_calls[j]["name"]] = api_responses
                     print(len(str(api_response)), num_tokens)
 large_re = {"booking-com15.p.rapidapi.com": large_responses}
-json.dump(large_re, open("large_responses_complex_func_bench.json", "w"), indent=4)
+json.dump(large_re, open("./data/large_responses_complex_func_bench.json", "w"), indent=4)
+
+extract_endpoint_data("booking-com15.p.rapidapi.com", "Get_Room_List_With_Availability")
+extract_endpoint_data("booking-com15.p.rapidapi.com", "Search_Flights_Multi_Stops")
+extract_endpoint_data("booking-com15.p.rapidapi.com", "Get_Seat_Map")
+extract_endpoint_data("booking-com15.p.rapidapi.com", "Get_Availability")
+extract_endpoint_data("booking-com15.p.rapidapi.com", "Search_Car_Rentals")
+

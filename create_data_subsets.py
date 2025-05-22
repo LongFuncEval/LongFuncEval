@@ -69,7 +69,7 @@ if __name__ == "__main__":
                 task_list_obj = task_list(
                     os.path.join(
                         os.path.dirname(__file__),
-                        f"../data/{host}_{endpoint_name}.json",
+                        f"data/{host}_{endpoint_name}.json",
                     ),
                 )
                 output_data_dict, num_entities = task_list_obj.create_data_subsets(
@@ -99,7 +99,7 @@ if __name__ == "__main__":
                 open(
                     os.path.join(
                         os.path.dirname(__file__),
-                        f"../data/data_subsets_for_lim_experiments/{host}_{endpoint_name}_subset_{token_limit}.json",
+                        f"data/data_subsets_for_lim_experiments/{host}_{endpoint_name}_subset_{token_limit}.json",
                     ),
                     "w",
                 ),

@@ -1,9 +1,55 @@
 import copy
+from enum import Enum
+import json
 import os
 from typing import Any
-from enum import Enum
 from openai import AzureOpenAI
 import time
+
+def extract_endpoint_data(
+    app: str,
+    endpoint: str,
+    path_to_large_response_directory: str = "data",
+    output_dir: str = "data",
+) -> None:
+    output_file_name = f"{app}_{endpoint.replace('/', '_')}.json"
+    cache_subset_of_large_responses: Any = {}
+
+    for filename in os.listdir(path_to_large_response_directory):
+        response_cache = {}
+        try:
+            response_cache = json.load(
+                open(os.path.join(path_to_large_response_directory, filename), "r")
+            )
+        except BaseException:
+            continue
+        try:
+            for api_provider, responses in response_cache.items():
+                if api_provider.lower() == app.lower():
+                    for endpoint_str, api_responses in responses.items():
+                        if endpoint_str.lower() == endpoint.lower():
+                            for arguments, api_response in api_responses.items():
+                                try:
+                                    level1_dict = cache_subset_of_large_responses.get(
+                                        api_provider, {}
+                                    )
+                                    level2_dict = level1_dict.get(endpoint, {})
+                                    level2_dict[arguments] = api_response
+                                    level1_dict[endpoint] = level2_dict
+                                    cache_subset_of_large_responses[api_provider] = (
+                                        level1_dict
+                                    )
+                                except KeyError:
+                                    print(api_response)
+                                except BaseException:
+                                    print("Not KeyError", api_response)
+        except BaseException:
+            continue
+
+    json.dump(
+        cache_subset_of_large_responses,
+        open(os.path.expanduser(os.path.join(output_dir, output_file_name)), "w"),
+    )
 
 def manipulate_response(api_response: Any, index: int) -> Any:
     # create a new dictionary such that the first element from this dictionary is moved to the position `index`

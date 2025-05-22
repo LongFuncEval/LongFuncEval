@@ -205,9 +205,6 @@ class BookingSearchFlightsMultiStopsTaskList(TaskList):
                                     )
                     except BaseException as e:
                         print(e)
-                        import pdb
-
-                        pdb.set_trace()
                         pass
                     query_index += 1
                     if query_index == len(queries):
@@ -350,7 +347,7 @@ class BookingSearchCarRentalsTaskList(TaskList):
         num_entities = 0
         for app, endpoint_info in api_responses.items():
             for endpoint, queries in endpoint_info.items():
-                starting_index = random_seed #random.randint(0, len(queries) - 1)
+                starting_index = random.randint(0, len(queries) - 1)
                 queries_list = list(queries.keys())
                 query_index = starting_index
                 while num_tokens < token_limit:
