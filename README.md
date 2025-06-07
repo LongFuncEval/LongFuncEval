@@ -39,7 +39,8 @@ python run_experiments.py \
 ```
 
 The config file `experiment_config.yaml` has details of how to provide the response token limit or position of the answer etc.
-
+For model `gpt/gpt-4o-2024-11-20`, the code uses the AzureOpenAI and .env.example has environment variables you need to set in your .env file.
+`large_response_QA.large_response_utils.py` has the code for model inference if it needs any changes depending on your requirements.
 
 ### Cite as: 
 
